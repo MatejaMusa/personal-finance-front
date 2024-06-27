@@ -9,15 +9,11 @@ export const createUser = async (userData) => {
   return response.data.data.user;
 };
 
-export const loginUser = async (
-  userData
-) => {
+export const loginUser = async (userData) => {
   const response = await axiosInstance.post(
     "/auth/login",
     userData
   )
-  console.log(JSON.stringify(response.data.data.user, null,2))
-
   return response.data.data.user;
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -25,18 +26,20 @@ const schema = z.object({
     }),
 });
 
-const AccountForm = () => {
+const AccountForm = ({ createAccount }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const submit = (accountData) => {
+    createAccount(accountData);
+    reset();
+  }
 
   return (
     <Container>
@@ -54,7 +57,7 @@ const AccountForm = () => {
         </Typography>
         <Box
           component="form"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(submit)}
           sx={{ mt: 3, width: "100%" }}
         >
           <Controller

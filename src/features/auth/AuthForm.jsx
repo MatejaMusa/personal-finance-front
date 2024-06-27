@@ -5,6 +5,7 @@ import { TextField, Button, Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLoginUser, useSignupUser } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../utils/toast";
 
 const schema = z.object({
   username: z.string().min(5, "Username is required"),
@@ -28,20 +29,32 @@ const AuthForm = () => {
     resolver: zodResolver(schema),
   });
 
-  const [isSignup, setIsSignup] = useState(true);
+  const [isSignup, setIsSignup] = useState(false);
 
-
-  const { mutate: mutateSignup } = useSignupUser();
-  const { mutate: mutateLogin, error: loginError, isError } = useLoginUser();
+  const {
+    mutate: mutateSignup,
+    error: signupError,
+    isError: isSignupError,
+  } = useSignupUser();
+  const {
+    mutate: mutateLogin,
+    error: loginError,
+    isError: isLoginError,
+  } = useLoginUser();
 
   const onSubmit = (data) => {
     if (isSignup) {
-      mutateSignup(data);
-      setIsSignup(false);
+      mutateSignup(data, {
+        onSuccess: () => {
+          setIsSignup(false);
+          showToast("You've signed up!");
+        },
+      });
     } else {
       mutateLogin(data, {
         onSuccess: (data) => {
           sessionStorage.setItem("user", JSON.stringify(data));
+          showToast("You've logged in!");
           navigate("/");
         },
       });
@@ -66,9 +79,14 @@ const AuthForm = () => {
         <Typography variant="h4" gutterBottom style={{ color: "#ff8906" }}>
           {isSignup ? "Sign Up" : "Log In"}
         </Typography>
-        {isError && (
+        {isLoginError && (
           <Typography color="error">
             {loginError.response.data.reason}
+          </Typography>
+        )}
+        {isSignupError && (
+          <Typography color="error">
+            {signupError.response.data.reason}
           </Typography>
         )}
         <Box

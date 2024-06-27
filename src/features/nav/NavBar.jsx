@@ -1,11 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
+import { Link, Menu, MenuItem } from "@mui/material";
+import { useState } from "react";
 
 export const NavBar = () => {
   const userDataString = sessionStorage.getItem("user");
   const user = userDataString ? JSON.parse(userDataString) : null;
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = !!anchorEl;
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("user");
+    window.location.reload();
+  };
+
   return (
     <nav
       style={{
@@ -55,7 +71,29 @@ export const NavBar = () => {
           </li>
         </ul>
 
-        <p>{user.username}</p>
+        <Link
+          component="button"
+          variant="body2"
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          style={{ color: "white", textDecoration: 'none' }}
+        >
+          <p>{user.username}</p>
+        </Link>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
       </div>
     </nav>
   );

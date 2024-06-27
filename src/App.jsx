@@ -8,6 +8,8 @@ import LayoutWithNavbar from "./features/LayoutWithNavbar";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./api/api";
 import ProtectedRoute from "./features/ProtectRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <ToastContainer />
     </QueryClientProvider>
   );
 }
