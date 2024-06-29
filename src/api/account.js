@@ -2,27 +2,18 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "./api";
 
 export const createAccount = async (accountData) => {
-  await axiosInstance.post(
-    "/account/create",
-    accountData
-  );
+  await axiosInstance.post("/account/create", accountData);
 };
 
 export const getAccounts = async () => {
-  const response = await axiosInstance.get(
-    "/account/accounts"
-  );
-  console.log(JSON.stringify(response, null, 2))
+  const response = await axiosInstance.get("/account/accounts");
   return response.data;
 };
 
-// export const getOneAccount = async (id) => {
-//     const response = await axiosInstance.get(
-//       "/account/accounts",
-//       userData
-//     );
-//     return response.data.data;
-//   };
+export const getOneAccount = async (id) => {
+  const response = await axiosInstance.get(`/account/${id}`);
+  return response;
+};
 
 export const useCreateAccount = () => {
   return useMutation({
@@ -32,7 +23,14 @@ export const useCreateAccount = () => {
 
 export const useGetAccounts = () => {
   return useQuery({
-    queryKey: ['allAccounts'],
-    queryFn: getAccounts
-  })
+    queryKey: ["allAccounts"],
+    queryFn: getAccounts,
+  });
+};
+
+export const useGetOneAccount = (id) => {
+  return useQuery({
+    queryKey: ["oneAccount", id],
+    queryFn: () => getOneAccount(id)
+  });
 }

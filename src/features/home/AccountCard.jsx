@@ -2,7 +2,7 @@
 import { Card, CardContent, Chip, Typography } from "@mui/material";
 import styled from "styled-components";
 
-const AccountCard = ({ name, description, priority, balance }) => {
+const AccountCard = ({ name, description, priority, balance, onClick }) => {
   const resolveColor = (priority) => {
     switch (priority) {
       case "HIGH":
@@ -16,7 +16,7 @@ const AccountCard = ({ name, description, priority, balance }) => {
     }
   };
   return (
-    <Card style={{ background: '#a7a9be', maxWidth: '300px' }}>
+    <Card style={{ background: '#a7a9be', maxWidth: '300px', cursor: 'pointer' }} onClick={onClick}>
       <StyledCardContent style={{ padding: "20px 50px", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
         <Typography variant="h6">{name}</Typography>
         <Typography variant="body">{description}</Typography>

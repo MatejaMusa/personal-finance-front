@@ -15,38 +15,38 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
+
 const schema = z.object({
-  name: z.string().min(8, "Account name has to be at least 8 characters long"),
-  description: z
-    .string()
-    .max(100, "Description must be less than 100 characters"),
-    priority: z.enum(["LOW", "MEDIUM", "HIGH"], {
-      errorMap: (issue, _ctx) => {
-        if (issue.code === "invalid_enum_value") {
-          return { message: "Priority must be one of LOW, MEDIUM, or HIGH" };
-        }
-        return { message: issue.message };
-      },
-    }),
+  name: z.string().min(3, "Account name has to be at least 3 characters long"),
+  type: z.enum(["EXPENSE", "INCOME"], {
+    errorMap: (issue, _ctx) => {
+      if (issue.code === "invalid_enum_value") {
+        return { message: "Type must be INCOME or EXPENSE" };
+      }
+      return { message: issue.message };
+    },
+  }),
 });
 
-const AccountForm = ({ createAccount }) => {
+export const CategoriesForm = ({ createCategory }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm({
     resolver: zodResolver(schema),
   });
 
-  const submit = (accountData) => {
-    createAccount(accountData);
+  const submit = (categoryData) => {
+    createCategory(categoryData);
     reset();
-  }
+  };
 
   return (
-    <Container style={{ border: "1px solid #ff8906", backgroundColor: "white" }}>
+    <Container
+      style={{ border: "1px solid #ff8906", backgroundColor: "white" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -57,7 +57,7 @@ const AccountForm = ({ createAccount }) => {
         }}
       >
         <Typography variant="h4" gutterBottom style={{ color: "#ff8906" }}>
-          Create Account
+          Create Category
         </Typography>
         <Box
           component="form"
@@ -80,44 +80,18 @@ const AccountForm = ({ createAccount }) => {
             )}
           />
           <Controller
-            name="description"
+            name="type"
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <TextField
-                {...field}
-                label="Description"
-                fullWidth
-                margin="normal"
-                error={!!errors.description}
-                helperText={
-                  errors.description
-                    ? errors.description.message?.toString()
-                    : ""
-                }
-              />
-            )}
-          />
-          <Controller
-            name="priority"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <FormControl
-                fullWidth
-                margin="normal"
-                error={!!errors.priority}
-              >
+              <FormControl fullWidth margin="normal" error={!!errors.type}>
                 <InputLabel>Priority</InputLabel>
                 <Select {...field} label="Priority" defaultValue="">
-                  <MenuItem value="LOW">Low</MenuItem>
-                  <MenuItem value="MEDIUM">Medium</MenuItem>
-                  <MenuItem value="HIGH">High</MenuItem>
+                  <MenuItem value="EXPENSE">Expense</MenuItem>
+                  <MenuItem value="INCOME">Income</MenuItem>
                 </Select>
                 <FormHelperText>
-                  {errors.priority
-                    ? errors.priority.message?.toString()
-                    : ""}
+                  {errors.type ? errors.type.message?.toString() : ""}
                 </FormHelperText>
               </FormControl>
             )}
@@ -136,5 +110,3 @@ const AccountForm = ({ createAccount }) => {
     </Container>
   );
 };
-
-export default AccountForm;

@@ -10,6 +10,7 @@ import { queryClient } from "./api/api";
 import ProtectedRoute from "./features/ProtectRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Account } from "./features/account/Account";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route element={<LayoutWithNavbar />}>
               <Route path="/" element={<Home />} />
               <Route path="/categories" element={<Categories />} />
+              <Route path="/account/:id" element={<Account />} />
             </Route>
           </Route>
         </Routes>

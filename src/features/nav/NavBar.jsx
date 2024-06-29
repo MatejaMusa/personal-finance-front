@@ -46,7 +46,7 @@ export const NavBar = () => {
             display: "flex",
             listStyleType: "none",
             justifyContent: "center",
-            gap: "10px",
+            gap: "20px",
           }}
         >
           <li>
@@ -101,4 +101,5 @@ export const NavBar = () => {
 
 const StyledTitle = styled.h1`
   color: #ff8906;
+  margin-left: 10px
 `;
