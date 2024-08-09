@@ -3,6 +3,7 @@ import { useCreateAccount, useGetAccounts } from "../../api/account";
 import { showToast } from "../../utils/toast";
 import AccountCard from "./AccountCard";
 import AccountForm from "./AccountForm";
+import Spinner from "../../components/Spinner";
 
 export const Home = () => {
   const { data, error, isError, isLoading, refetch } = useGetAccounts();
@@ -19,7 +20,7 @@ export const Home = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   if (isError) {
