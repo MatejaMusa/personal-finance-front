@@ -88,7 +88,7 @@ export const Account = () => {
         justifyContent: "flex-start",
         alignItems: "start",
         marginLeft: "50px",
-        gap: "35px",
+        gap: "5px",
         flexWrap: "wrap",
       }}
     >

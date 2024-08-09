@@ -37,6 +37,7 @@ export const Categories = () => {
         display: "flex",
         justifyContent: "space-between",
         marginLeft: "50px",
+        flexWrap: "wrap"
       }}
     >
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -48,6 +49,7 @@ export const Categories = () => {
           display: "flex",
           flexGrow: 1,
           justifyContent: "space-evenly",
+          flexWrap: "wrap"
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
