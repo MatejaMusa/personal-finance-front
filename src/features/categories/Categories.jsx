@@ -1,4 +1,5 @@
 import { useCreateCategory, useGetCategories } from "../../api/category";
+import Spinner from "../../components/Spinner";
 import { showToast } from "../../utils/toast";
 import { CategoriesForm } from "./CategoriesForm";
 
@@ -23,7 +24,7 @@ export const Categories = () => {
     : [];
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   if (isError) {

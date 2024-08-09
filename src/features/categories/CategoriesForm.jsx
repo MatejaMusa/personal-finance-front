@@ -85,8 +85,8 @@ export const CategoriesForm = ({ createCategory }) => {
             defaultValue=""
             render={({ field }) => (
               <FormControl fullWidth margin="normal" error={!!errors.type}>
-                <InputLabel>Priority</InputLabel>
-                <Select {...field} label="Priority" defaultValue="">
+                <InputLabel>Type</InputLabel>
+                <Select {...field} label="Type" defaultValue="">
                   <MenuItem value="EXPENSE">Expense</MenuItem>
                   <MenuItem value="INCOME">Income</MenuItem>
                 </Select>
