@@ -12,7 +12,7 @@ export const getAccounts = async () => {
 
 export const getOneAccount = async (id) => {
   const response = await axiosInstance.get(`/account/${id}`);
-  return response;
+  return response.data;
 };
 
 export const useCreateAccount = () => {
