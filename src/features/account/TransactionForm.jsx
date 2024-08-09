@@ -18,20 +18,19 @@ import {
 import { useGetCategories } from "../../api/category";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useState } from "react";
 import dayjs from "dayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 
 const schema = z.object({
-  age : z.preprocess((a) => parseInt(z.string().parse(a),10),
+  amount: z.preprocess((a) => parseInt(z.string().parse(a),10),
   z.number().gte(0,"You must put in positive number")),
-  category: z.coerce.number().min(1),
-  date: z.date().refine((date) => date <= new Date(), {
-    message: "Date cannot be in the future",
-  }),
+  categoryId: z.coerce.number().min(1),
+  transactionDate: z.preprocess((val) => dayjs(val), z.custom((val) => dayjs.isDayjs(val) && val.isValid(), {
+    message: "Invalid date",
+  }))
 });
 
-export const TransactionForm = ({ createTransaction }) => {
+export const TransactionForm = ({ createTransaction, accountId }) => {
   const {
     control,
     handleSubmit,
@@ -44,16 +43,10 @@ export const TransactionForm = ({ createTransaction }) => {
   const { data, error, isError, isLoading } = useGetCategories();
 
   const submit = (transactionData) => {
-    createTransaction(transactionData);
+    createTransaction({...transactionData, accountId });
     reset();
   };
-
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-
-  const handleDateChange = (newValue) => {
-    setSelectedDate(newValue);
-  };
-
+  
   return (
     <Container
       style={{ border: "1px solid #ff8906", backgroundColor: "white" }}
@@ -94,7 +87,7 @@ export const TransactionForm = ({ createTransaction }) => {
             )}
           />
           <Controller
-            name="category"
+            name="categoryId"
             control={control}
             defaultValue=""
             render={({ field }) => (
@@ -114,17 +107,25 @@ export const TransactionForm = ({ createTransaction }) => {
             )}
           />
           <Controller
-            name="date"
+            name="transactionDate"
             control={control}
-            defaultValue={new Date()}
+            defaultValue={dayjs(new Date())}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DesktopDatePicker
                   label="Date picker"
                   inputFormat="MM/DD/YYYY"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  renderInput={(params) => <TextField {...params} />}
+                  value={field.value}
+                  onChange={(newValue) => {
+                    field.onChange(newValue)
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      error={!!errors.transactionDate}
+                      helperText={errors.transactionDate ? errors.transactionDate.message?.toString() : ""}
+                    />
+                  )}
                 />
               </LocalizationProvider>
             )}
