@@ -4,7 +4,7 @@ import axios from 'axios';
 const backendHost = import.meta.env.BACKEND_HOST
 
 export const axiosInstance = axios.create({
-  baseURL: `http://${backendHost}:8080`,
+  baseURL: `http://localhost:8080`,
   headers: {
     'Content-Type': 'application/json',
   },
