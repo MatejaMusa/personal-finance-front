@@ -16,8 +16,8 @@ const AccountCard = ({ name, description, priority, balance, onClick }) => {
     }
   };
   return (
-    <Card style={{ background: '#a7a9be', maxWidth: '300px', cursor: 'pointer' }} onClick={onClick}>
-      <StyledCardContent style={{ padding: "20px 50px", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
+    <StyledCard onClick={onClick}>
+      <StyledCardContent>
         <Typography variant="h6">{name}</Typography>
         <Typography variant="body">{description}</Typography>
         <Chip
@@ -28,13 +28,24 @@ const AccountCard = ({ name, description, priority, balance, onClick }) => {
         />
         <Typography variant="body">Balance : {balance} eur</Typography>
       </StyledCardContent>
-    </Card>
+    </StyledCard>
   );
 };
 
 export default AccountCard;
 
+const StyledCard = styled(Card)`
+  background: #a7a9be;
+  max-width: 300px;
+  cursor: pointer;
+`;
+
 const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 `;

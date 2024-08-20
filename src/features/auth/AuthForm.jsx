@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useLoginUser, useSignupUser } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../utils/toast";
+import styled from "styled-components";
 
 const schema = z.object({
   username: z.string().min(5, "Username is required"),
@@ -76,9 +77,9 @@ const AuthForm = () => {
           mb: 5,
         }}
       >
-        <Typography variant="h4" gutterBottom style={{ color: "#ff8906" }}>
+        <StyledText variant="h4" gutterBottom>
           {isSignup ? "Sign Up" : "Log In"}
-        </Typography>
+        </StyledText>
         {isLoginError && (
           <Typography color="error">
             {loginError.response.data.reason}
@@ -133,13 +134,8 @@ const AuthForm = () => {
               />
             )}
           />
-          <a
+          <StyledA
             href="#"
-            style={{
-              color: "blue",
-              textDecoration: "underline",
-              cursor: "pointer",
-            }}
             onClick={(e) => {
               e.preventDefault();
               setIsSignup(!isSignup);
@@ -148,20 +144,33 @@ const AuthForm = () => {
             {isSignup
               ? "Already have an account? Click here to log in."
               : "Don't have an account yet? Click here to sign up."}
-          </a>
-          <Button
+          </StyledA>
+          <StyledButton
             type="submit"
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
-            style={{ backgroundColor: "#ff8906" }}
           >
             {isSignup ? "Sign Up" : "Log In"}
-          </Button>
+          </StyledButton>
         </Box>
       </Box>
     </Container>
   );
 };
+
+const StyledButton = styled(Button)`
+  background-color: #ff8906;
+`;
+
+const StyledText = styled(Typography)`
+  color: #ff8906;
+`;
+
+StyledA = styled.a`
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+`;
 
 export default AuthForm;

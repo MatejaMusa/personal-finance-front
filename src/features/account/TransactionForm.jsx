@@ -20,6 +20,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
+import styled from "styled-components";
+
 
 const schema = z.object({
   amount: z.preprocess((a) => parseInt(z.string().parse(a),10),
@@ -130,17 +132,20 @@ export const TransactionForm = ({ createTransaction, accountId }) => {
               </LocalizationProvider>
             )}
           />
-          <Button
+          <StyledButton
             type="submit"
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
-            style={{ backgroundColor: "#ff8906" }}
           >
             Submit
-          </Button>
+          </StyledButton>
         </Box>
       </Box>
     </Container>
   );
 };
+
+const StyledButton  = styled(Button)`
+  background-color: #ff8906;
+`;

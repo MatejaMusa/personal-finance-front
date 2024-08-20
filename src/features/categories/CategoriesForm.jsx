@@ -15,6 +15,7 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
+import styled from "styled-components";
 
 const schema = z.object({
   name: z.string().min(3, "Account name has to be at least 3 characters long"),
@@ -44,9 +45,7 @@ export const CategoriesForm = ({ createCategory }) => {
   };
 
   return (
-    <Container
-      style={{ border: "1px solid #ff8906", backgroundColor: "white" }}
-    >
+    <StyledContainer>
       <Box
         sx={{
           display: "flex",
@@ -56,9 +55,9 @@ export const CategoriesForm = ({ createCategory }) => {
           mb: 5,
         }}
       >
-        <Typography variant="h4" gutterBottom style={{ color: "#ff8906" }}>
+        <StyledText variant="h4" gutterBottom>
           Create Category
-        </Typography>
+        </StyledText>
         <Box
           component="form"
           onSubmit={handleSubmit(submit)}
@@ -96,17 +95,29 @@ export const CategoriesForm = ({ createCategory }) => {
               </FormControl>
             )}
           />
-          <Button
+          <StyledButton
             type="submit"
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
-            style={{ backgroundColor: "#ff8906" }}
           >
             Submit
-          </Button>
+          </StyledButton>
         </Box>
       </Box>
-    </Container>
+    </StyledContainer>
   );
 };
+
+const StyledButton  = styled(Button)`
+  background-color: #ff8906;
+`;
+
+const StyledContainer = styled(Container)`
+  border: 1px solid #ff8906;
+  background-color: white;
+`;
+
+const StyledText = styled(Typography)`
+  color: #ff8906;
+`;

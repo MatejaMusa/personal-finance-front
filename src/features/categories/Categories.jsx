@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { useCreateCategory, useGetCategories } from "../../api/category";
 import Spinner from "../../components/Spinner";
 import { showToast } from "../../utils/toast";
@@ -32,39 +33,61 @@ export const Categories = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        marginLeft: "50px",
-        flexWrap: "wrap"
-      }}
-    >
-      <div style={{ display: "flex", flexDirection: "column" }}>
+    <CategoriesWrapper>
+      <CategoriesFormWrapper>
         <h1>Welcome to Categories Dashboard</h1>
         <CategoriesForm createCategory={handleMutate}/>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexGrow: 1,
-          justifyContent: "space-evenly",
-          flexWrap: "wrap"
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h2 style={{ color: "red" }}>Expense</h2>
+      </CategoriesFormWrapper>
+      <CategoriesLayout>
+        <ColumnContainer>
+          <RedText>Expense</RedText>
             {expenseCategories.map((category) => (
-              <p style={{ fontSize: '20px' }} key={category.id}>{category.name}</p>
+              <StyledText key={category.id}>{category.name}</StyledText>
             ))}
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h2 style={{ color: "green" }}>Income</h2>
+        </ColumnContainer>
+        <ColumnContainer>
+          <GreenText>Income</GreenText>
             {incomeCategories.map((category) => (
-              <p style={{ fontSize: '20px' }} key={category.id}>{category.name}</p>
+              <StyledText key={category.id}>{category.name}</StyledText>
             ))}
-        </div>
-      </div>
-    </div>
+        </ColumnContainer>
+      </CategoriesLayout>
+    </CategoriesWrapper>
   );
 };
+
+const CategoriesWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-left: 50px;
+  flex-wrap: wrap;
+`;
+
+const CategoriesFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CategoriesLayout = styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+`;
+
+const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const GreenText = styled.h2`
+  color: green;
+`;
+
+const RedText = styled.h2`
+  color: red;
+`;
+
+const StyledText = styled.p`
+  font-size: 20px;
+`

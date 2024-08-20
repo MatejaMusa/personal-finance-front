@@ -23,6 +23,7 @@ import {
   Typography,
 } from "@mui/material";
 import Spinner from "../../components/Spinner";
+import styled from "styled-components";
 
 export const Account = () => {
   const [page, setPage] = useState(0);
@@ -82,22 +83,13 @@ export const Account = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "start",
-        marginLeft: "50px",
-        gap: "5px",
-        flexWrap: "wrap",
-      }}
-    >
-      <div style={{ display: "flex", maxWidth: "600px" }}>
+    <StyleAccountPage>
+      <TransactionFormWrapper>
         <TransactionForm
           createTransaction={handleCreateTransaction}
           accountId={accountId}
         />
-      </div>
+      </TransactionFormWrapper>
       <div>
         <TableContainer component={Paper}>
           <Table>
@@ -127,14 +119,13 @@ export const Account = () => {
                       .join("-")}
                   </TableCell>
                   <TableCell>
-                    <Button
+                    <StyledButton
                       onClick={() => handleCorrectTransaction(transaction.id)}
                       variant="contained"
-                      style={{ backgroundColor: "#ff8906" }}
                       size="small"
                     >
                       Correct
-                    </Button>
+                    </StyledButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -175,6 +166,24 @@ export const Account = () => {
           height={200}
         />
       </Paper>
-    </div>
+    </StyleAccountPage>
   );
 };
+
+const StyleAccountPage = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  margin-left: 50px;
+  gap: 5px;
+  flex-wrap: wrap;
+`;
+
+const TransactionFormWrapper = styled.div`
+  display: flex;
+  max-width: 600px;
+`;
+
+const StyledButton  = styled(Button)`
+  background-color: #ff8906;
+`;

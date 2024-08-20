@@ -1,30 +1,41 @@
+import styled from "styled-components";
 import AuthForm from "./AuthForm";
 
 export const Auth = () => {
   return (
-    <div
-      style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(9, 1fr)', 
-            height: '100vh'
-          }}
-    >
-      <main
-        style={{
-            gridColumn: '4 / span 3',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
-            padding: '20px'
-        }}
-      >
-        <h1 style={{ color: '#ff8906' }}>Personal Finance App</h1>
-        <div style={{ width: '100%', border: '1px solid #ff8906', backgroundColor: 'white' }}>
-
-        <AuthForm />
-        </div>
-      </main>
-    </div>
+    <StyledWrapper>
+      <StyledMain>
+        <StyledHeading>Personal Finance App</StyledHeading>
+        <StyledAccountWrapper>
+          <AuthForm />
+        </StyledAccountWrapper>
+      </StyledMain>
+    </StyledWrapper>
   );
 };
+
+const StyledWrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+`;
+
+const StyledHeading = styled.h1`
+  color: #ff8906;
+`;
+
+const StyledAccountWrapper = styled.div`
+  width: 100%;
+  border: 1px solid #ff8906;
+  background-color: white;
+`;

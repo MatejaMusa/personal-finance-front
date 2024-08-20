@@ -23,53 +23,29 @@ export const NavBar = () => {
   };
 
   return (
-    <nav
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "#0f0e17",
-        padding: "0 30px 0 10px",
-      }}
-    >
+    <StyledNav>
       <StyledTitle>Personal Finance App</StyledTitle>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexGrow: 1,
-        }}
-      >
-        <ul
-          style={{
-            display: "flex",
-            listStyleType: "none",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
+      <NavContentContainer>
+        <StyledUl>
           <li>
-            <Button
+            <StyledButton
               size="large"
               onClick={() => navigate("/")}
               variant="contained"
-              style={{ backgroundColor: "#ff8906" }}
             >
               Home
-            </Button>
+            </StyledButton>
           </li>
           <li>
-            <Button
+            <StyledButton
               size="large"
               onClick={() => navigate("/categories")}
               variant="contained"
-              style={{ backgroundColor: "#ff8906" }}
             >
               Categories
-            </Button>
+            </StyledButton>
           </li>
-        </ul>
+        </StyledUl>
 
         <Link
           component="button"
@@ -79,7 +55,7 @@ export const NavBar = () => {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          style={{ color: "white", textDecoration: 'none' }}
+          style={{ color: "white", textDecoration: "none" }}
         >
           <p>{user.username}</p>
         </Link>
@@ -94,12 +70,38 @@ export const NavBar = () => {
         >
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-      </div>
-    </nav>
+      </NavContentContainer>
+    </StyledNav>
   );
 };
 
 const StyledTitle = styled.h1`
   color: #ff8906;
-  margin-left: 10px
+  margin-left: 10px;
+`;
+
+const StyledNav = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0f0e17;
+  padding: 0 30px 0 10px;
+`;
+
+const NavContentContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+`;
+
+const StyledUl = styled.ul`
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  gap: 20px;
+`;
+
+const StyledButton = styled(Button)`
+  background-color: #ff8906;
 `;
