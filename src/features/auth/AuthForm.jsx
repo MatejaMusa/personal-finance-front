@@ -149,8 +149,7 @@ const AuthForm = () => {
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 5 }}
-            style={{ backgroudColor: '#ff8906' }}
+            sx={{ mt: 5, backgroudColor: "#ff8906" }}
           >
             {isSignup ? "Sign Up" : "Log In"}
           </Button>
