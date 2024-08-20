@@ -55,6 +55,10 @@ export const Home = () => {
 const StyledContainer = styled.div`
   display: flex;
   height: 100vh;
+
+  @media screen and (max-width: 639px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledForm = styled.div`
