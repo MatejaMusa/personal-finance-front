@@ -4,6 +4,7 @@ import { showToast } from "../../utils/toast";
 import AccountCard from "./AccountCard";
 import AccountForm from "./AccountForm";
 import Spinner from "../../components/Spinner";
+import styled from "styled-components";
 
 export const Home = () => {
   const { data, error, isError, isLoading, refetch } = useGetAccounts();
@@ -28,36 +29,14 @@ export const Home = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(11, 1fr)",
-        height: "100vh",
-      }}
-    >
-      <div
-        style={{
-          gridColumn: "1 / span 4",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          margin: "0 30px",
-        }}
-      >
+    <StyledContainer>
+      <StyledForm>
         <h1>Welcome to Accounts Dashboard</h1>
         <AccountForm
           createAccount={(accountData) => handleMutate(accountData)}
         />
-      </div>
-      <div
-        style={{
-          gridColumn: "5 / span 7",
-          display: "flex",
-          flexWrap: "wrap",
-          alignContent: "flex-start",
-          gap: "40px",
-        }}
-      >
+      </StyledForm>
+      <StyledCards>
         {data.map((account) => (
           <AccountCard
             onClick={() => navigate(`/account/${account.id}`)}
@@ -68,7 +47,35 @@ export const Home = () => {
             balance={account.balance}
           />
         ))}
-      </div>
-    </div>
+      </StyledCards>
+    </StyledContainer>
   );
 };
+
+const StyledContainer = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+
+const StyledForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 30px;
+
+  @media screen and (max-width: 639px) {
+    margin: 0 30px 10px 30px;
+  }
+`;
+
+const StyledCards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 40px;
+
+  @media screen and (max-width: 639px) {
+    justify-content: center;
+  }
+`;
+
