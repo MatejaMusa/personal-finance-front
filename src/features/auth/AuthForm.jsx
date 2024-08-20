@@ -167,7 +167,7 @@ const StyledText = styled(Typography)`
   color: #ff8906;
 `;
 
-StyledA = styled.a`
+const StyledA = styled.a`
   color: blue;
   text-decoration: underline;
   cursor: pointer;
