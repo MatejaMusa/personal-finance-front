@@ -145,23 +145,20 @@ const AuthForm = () => {
               ? "Already have an account? Click here to log in."
               : "Don't have an account yet? Click here to sign up."}
           </StyledA>
-          <StyledButton
+          <Button
             type="submit"
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
+            style={{ backgroudColor: '#ff8906' }}
           >
             {isSignup ? "Sign Up" : "Log In"}
-          </StyledButton>
+          </Button>
         </Box>
       </Box>
     </Container>
   );
 };
-
-const StyledButton = styled(Button)`
-  background-color: #ff8906;
-`;
 
 const StyledText = styled(Typography)`
   color: #ff8906;

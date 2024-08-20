@@ -132,20 +132,17 @@ export const TransactionForm = ({ createTransaction, accountId }) => {
               </LocalizationProvider>
             )}
           />
-          <StyledButton
+          <Button
             type="submit"
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
+            style={{ backgroudColor: '#ff8906' }}
           >
             Submit
-          </StyledButton>
+          </Button>
         </Box>
       </Box>
     </Container>
   );
 };
-
-const StyledButton  = styled(Button)`
-  background-color: #ff8906;
-`;

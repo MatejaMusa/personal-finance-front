@@ -95,23 +95,20 @@ export const CategoriesForm = ({ createCategory }) => {
               </FormControl>
             )}
           />
-          <StyledButton
+          <Button
             type="submit"
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
+            style={{ backgroudColor: '#ff8906' }}
           >
             Submit
-          </StyledButton>
+          </Button>
         </Box>
       </Box>
     </StyledContainer>
   );
 };
-
-const StyledButton  = styled(Button)`
-  background-color: #ff8906;
-`;
 
 const StyledContainer = styled(Container)`
   border: 1px solid #ff8906;

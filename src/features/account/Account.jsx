@@ -119,13 +119,14 @@ export const Account = () => {
                       .join("-")}
                   </TableCell>
                   <TableCell>
-                    <StyledButton
+                    <Button
                       onClick={() => handleCorrectTransaction(transaction.id)}
                       variant="contained"
                       size="small"
+                      style={{ backgroudColor: '#ff8906' }}
                     >
                       Correct
-                    </StyledButton>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -182,8 +183,4 @@ const StyleAccountPage = styled.div`
 const TransactionFormWrapper = styled.div`
   display: flex;
   max-width: 600px;
-`;
-
-const StyledButton  = styled(Button)`
-  background-color: #ff8906;
 `;

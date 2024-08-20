@@ -17,7 +17,7 @@ export const Auth = () => {
 const StyledWrapper = styled.div`
   display: flex;
   height: 100vh;
-  width: 100%;
+  max-width: 600px;
   justify-content: center;
   align-items: center;
 `;
