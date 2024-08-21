@@ -5,7 +5,7 @@ import { TextField, Button, Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLoginUser, useSignupUser } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
-import { showToast } from "../../utils/toast";
+import { showErrorToast, showToast } from "../../utils/toast";
 import styled from "styled-components";
 
 const schema = z.object({
@@ -31,8 +31,6 @@ const AuthForm = () => {
   });
 
   const [isSignup, setIsSignup] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const {
     mutate: mutateSignup,
     error: signupError,
@@ -68,15 +66,13 @@ const AuthForm = () => {
   }, [isSignup, reset]);
 
   useEffect(() => {
-    console.log(errorMessage)
     if (isLoginError) {
-      setErrorMessage(loginError.response.data.reason);
+      showErrorToast(loginError.response.data.reason);
     } else if (isSignupError) {
-      setErrorMessage(signupError.response.data.reason);
+      showErrorToast(signupError.response.data.reason);
     }
-    console.log(errorMessage)
 
-  }, [isLoginError, isSignupError, loginError, signupError]);
+  }, [loginError, signupError]);
 
   return (
     <Container maxWidth="sm">
@@ -118,7 +114,6 @@ const AuthForm = () => {
                     ? errors.username.message?.toString()
                     : ""
                 }
-                onClick={setErrorMessage("")}
               />
             )}
           />
@@ -139,7 +134,6 @@ const AuthForm = () => {
                     ? errors.password.message?.toString()
                     : ""
                 }
-                onClick={setErrorMessage("")}
               />
             )}
           />
@@ -148,7 +142,6 @@ const AuthForm = () => {
             onClick={(e) => {
               e.preventDefault();
               setIsSignup(!isSignup);
-              setErrorMessage("");
             }}
           >
             {isSignup
