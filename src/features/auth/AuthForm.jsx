@@ -68,11 +68,14 @@ const AuthForm = () => {
   }, [isSignup, reset]);
 
   useEffect(() => {
+    console.log(errorMessage)
     if (isLoginError) {
       setErrorMessage(loginError.response.data.reason);
     } else if (isSignupError) {
       setErrorMessage(signupError.response.data.reason);
     }
+    console.log(errorMessage)
+
   }, [isLoginError, isSignupError, loginError, signupError]);
 
   return (
