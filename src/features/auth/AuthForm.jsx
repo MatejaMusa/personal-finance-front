@@ -31,6 +31,7 @@ const AuthForm = () => {
   });
 
   const [isSignup, setIsSignup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     mutate: mutateSignup,
@@ -66,6 +67,14 @@ const AuthForm = () => {
     reset({ username: "", password: "" });
   }, [isSignup, reset]);
 
+  useEffect(() => {
+    if (isLoginError) {
+      setErrorMessage(loginError.response.data.reason);
+    } else if (isSignupError) {
+      setErrorMessage(signupError.response.data.reason);
+    }
+  }, [isLoginError, isSignupError, loginError, signupError]);
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -80,14 +89,9 @@ const AuthForm = () => {
         <Typography variant="h4" style={{ color: "#ff8906" }} gutterBottom>
           {isSignup ? "Sign Up" : "Log In"}
         </Typography>
-        {isLoginError && (
+        {errorMessage && (
           <Typography color="error">
-            {loginError.response.data.reason}
-          </Typography>
-        )}
-        {isSignupError && (
-          <Typography color="error">
-            {signupError.response.data.reason}
+            {errorMessage}
           </Typography>
         )}
         <Box
@@ -111,6 +115,7 @@ const AuthForm = () => {
                     ? errors.username.message?.toString()
                     : ""
                 }
+                onClick={setErrorMessage("")}
               />
             )}
           />
@@ -131,6 +136,7 @@ const AuthForm = () => {
                     ? errors.password.message?.toString()
                     : ""
                 }
+                onClick={setErrorMessage("")}
               />
             )}
           />
@@ -139,6 +145,7 @@ const AuthForm = () => {
             onClick={(e) => {
               e.preventDefault();
               setIsSignup(!isSignup);
+              setErrorMessage("");
             }}
           >
             {isSignup
