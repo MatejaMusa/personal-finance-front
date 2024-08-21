@@ -28,13 +28,14 @@ export const NavBar = () => {
       <NavContentContainer>
         <StyledUl>
           <li>
-            <StyledButton
+            <Button
               size="large"
               onClick={() => navigate("/")}
               variant="contained"
+              style={{ backgroundColor: "#ff8906" }}
             >
               Home
-            </StyledButton>
+            </Button>
           </li>
           <li>
             <Button
