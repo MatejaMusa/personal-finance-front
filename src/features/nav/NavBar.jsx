@@ -37,13 +37,14 @@ export const NavBar = () => {
             </StyledButton>
           </li>
           <li>
-            <StyledButton
+            <Button
               size="large"
               onClick={() => navigate("/categories")}
               variant="contained"
+              style={{ backgroundColor: "#ff8906" }}
             >
               Categories
-            </StyledButton>
+            </Button>
           </li>
         </StyledUl>
 
@@ -100,8 +101,4 @@ const StyledUl = styled.ul`
   list-style-type: none;
   justify-content: center;
   gap: 20px;
-`;
-
-const StyledButton = styled(Button)`
-  background-color: #ff8906;
 `;

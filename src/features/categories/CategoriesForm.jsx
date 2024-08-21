@@ -45,7 +45,9 @@ export const CategoriesForm = ({ createCategory }) => {
   };
 
   return (
-    <StyledContainer>
+    <Container
+      style={{ border: "1px solid #ff8906", backgroundColor: "white" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -55,9 +57,9 @@ export const CategoriesForm = ({ createCategory }) => {
           mb: 5,
         }}
       >
-        <StyledText variant="h4" gutterBottom>
+        <Typography variant="h4" style={{ color: "#ff8906" }}gutterBottom>
           Create Category
-        </StyledText>
+        </Typography>
         <Box
           component="form"
           onSubmit={handleSubmit(submit)}
@@ -100,21 +102,12 @@ export const CategoriesForm = ({ createCategory }) => {
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
-            style={{ backgroudColor: '#ff8906' }}
+            style={{ backgroudColor: "#ff8906" }}
           >
             Submit
           </Button>
         </Box>
       </Box>
-    </StyledContainer>
+    </Container>
   );
 };
-
-const StyledContainer = styled(Container)`
-  border: 1px solid #ff8906;
-  background-color: white;
-`;
-
-const StyledText = styled(Typography)`
-  color: #ff8906;
-`;

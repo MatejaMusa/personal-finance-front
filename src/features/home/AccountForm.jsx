@@ -15,20 +15,19 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
-import styled from "styled-components";
 const schema = z.object({
   name: z.string().min(8, "Account name has to be at least 8 characters long"),
   description: z
     .string()
     .max(100, "Description must be less than 100 characters"),
-    priority: z.enum(["LOW", "MEDIUM", "HIGH"], {
-      errorMap: (issue, _ctx) => {
-        if (issue.code === "invalid_enum_value") {
-          return { message: "Priority must be one of LOW, MEDIUM, or HIGH" };
-        }
-        return { message: issue.message };
-      },
-    }),
+  priority: z.enum(["LOW", "MEDIUM", "HIGH"], {
+    errorMap: (issue, _ctx) => {
+      if (issue.code === "invalid_enum_value") {
+        return { message: "Priority must be one of LOW, MEDIUM, or HIGH" };
+      }
+      return { message: issue.message };
+    },
+  }),
 });
 
 const AccountForm = ({ createAccount }) => {
@@ -36,7 +35,7 @@ const AccountForm = ({ createAccount }) => {
     control,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm({
     resolver: zodResolver(schema),
   });
@@ -44,10 +43,12 @@ const AccountForm = ({ createAccount }) => {
   const submit = (accountData) => {
     createAccount(accountData);
     reset();
-  }
+  };
 
   return (
-    <StyledContainer>
+    <Container
+      style={{ border: "1px solid #ff8906", backgroundColor: "white" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -57,9 +58,9 @@ const AccountForm = ({ createAccount }) => {
           mb: 5,
         }}
       >
-        <StyledText variant="h4" gutterBottom>
+        <Typography variant="h4" style={{ color: "#ff8906" }} gutterBottom>
           Create Account
-        </StyledText>
+        </Typography>
         <Box
           component="form"
           onSubmit={handleSubmit(submit)}
@@ -104,11 +105,7 @@ const AccountForm = ({ createAccount }) => {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <FormControl
-                fullWidth
-                margin="normal"
-                error={!!errors.priority}
-              >
+              <FormControl fullWidth margin="normal" error={!!errors.priority}>
                 <InputLabel>Priority</InputLabel>
                 <Select {...field} label="Priority" defaultValue="">
                   <MenuItem value="LOW">Low</MenuItem>
@@ -116,9 +113,7 @@ const AccountForm = ({ createAccount }) => {
                   <MenuItem value="HIGH">High</MenuItem>
                 </Select>
                 <FormHelperText>
-                  {errors.priority
-                    ? errors.priority.message?.toString()
-                    : ""}
+                  {errors.priority ? errors.priority.message?.toString() : ""}
                 </FormHelperText>
               </FormControl>
             )}
@@ -128,23 +123,14 @@ const AccountForm = ({ createAccount }) => {
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
-            style={{ backgroudColor: '#ff8906' }}
+            style={{ backgroudColor: "#ff8906" }}
           >
             Submit
           </Button>
         </Box>
       </Box>
-    </StyledContainer>
+    </Container>
   );
 };
-
-const StyledText = styled(Typography)`
-  color: #ff8906;
-`;
-
-const StyledContainer = styled(Container)`
-  border: 1px solid #ff8906;
-  background-color: white;
-`;
 
 export default AccountForm;

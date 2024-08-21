@@ -77,9 +77,9 @@ const AuthForm = () => {
           mb: 5,
         }}
       >
-        <StyledText variant="h4" gutterBottom>
+        <Typography variant="h4" style={{ color: "#ff8906" }} gutterBottom>
           {isSignup ? "Sign Up" : "Log In"}
-        </StyledText>
+        </Typography>
         {isLoginError && (
           <Typography color="error">
             {loginError.response.data.reason}
@@ -159,10 +159,6 @@ const AuthForm = () => {
     </Container>
   );
 };
-
-const StyledText = styled(Typography)`
-  color: #ff8906;
-`;
 
 const StyledA = styled.a`
   color: blue;
