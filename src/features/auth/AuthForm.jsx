@@ -88,11 +88,6 @@ const AuthForm = () => {
         <Typography variant="h4" style={{ color: "#ff8906" }} gutterBottom>
           {isSignup ? "Sign Up" : "Log In"}
         </Typography>
-        {errorMessage && (
-          <Typography color="error">
-            {errorMessage}
-          </Typography>
-        )}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
