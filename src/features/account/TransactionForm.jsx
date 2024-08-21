@@ -137,7 +137,7 @@ export const TransactionForm = ({ createTransaction, accountId }) => {
             variant="contained"
             fullWidth
             sx={{ mt: 5 }}
-            style={{ backgroudColor: '#ff8906' }}
+            style={{ backgroundColor: '#ff8906' }}
           >
             Submit
           </Button>
