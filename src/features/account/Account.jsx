@@ -123,7 +123,7 @@ export const Account = () => {
                       onClick={() => handleCorrectTransaction(transaction.id)}
                       variant="contained"
                       size="small"
-                      style={{ backgroudColor: "#ff8906" }}
+                      style={{ backgroundColor: "#ff8906" }}
                     >
                       Correct
                     </Button>
